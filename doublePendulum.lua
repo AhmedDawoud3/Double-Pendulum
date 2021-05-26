@@ -48,10 +48,10 @@ function DoublePendulum:Render()
     table.insert(self.canvas, self.y2)
 
     love.graphics.line(0, 0, self.x1, self.y1)
-    love.graphics.circle('fill', self.x1, self.y1, self.m1, self.m1)
+    love.graphics.circle('fill', self.x1, self.y1, math.min(self.m1, 25), math.min(self.m1, 25))
 
     love.graphics.line(self.x1, self.y1, self.x2, self.y2)
-    love.graphics.circle('fill', self.x2, self.y2, self.m2, self.m2)
+    love.graphics.circle('fill', self.x2, self.y2, math.min(self.m2, 25), math.min(self.m2, 25))
 
     love.graphics.line(self.canvas)
 
