@@ -44,6 +44,10 @@ function DoublePendulum:Update(dt, g)
     table.insert(self.canvas, self.x2)
     table.insert(self.canvas, self.y2)
 
+    if #self.canvas > 50 then
+        table.remove(self.canvas, 1)
+        table.remove(self.canvas, 1)
+    end
 end
 
 function DoublePendulum:Render()
@@ -53,6 +57,6 @@ function DoublePendulum:Render()
     love.graphics.line(self.x1, self.y1, self.x2, self.y2)
     love.graphics.circle('fill', self.x2, self.y2, math.min(self.m2, 25), math.min(self.m2, 25))
     love.graphics.setPointSize(2)
-    love.graphics.points(self.canvas)
+    love.graphics.line(self.canvas)
 
 end
