@@ -36,9 +36,6 @@ function DoublePendulum:Update(dt, g)
                     ((self.a1_v ^ 2 * self.r1 * (self.m1 + self.m2)) + (g * (self.m1 + self.m2) * math.cos(self.a1)) +
                         (self.a2_v ^ 2 * self.r2 * self.m2 * math.cos(self.a1 - self.a2)))) /
                     (self.r2 * (2 * self.m1 + self.m2 - self.m2 * math.cos(2 * self.a1 - 2 * self.a2)))
-end
-
-function DoublePendulum:Render()
     self.x1 = self.r1 * math.sin(self.a1)
     self.y1 = self.r2 * math.cos(self.a1)
 
@@ -47,12 +44,15 @@ function DoublePendulum:Render()
     table.insert(self.canvas, self.x2)
     table.insert(self.canvas, self.y2)
 
+end
+
+function DoublePendulum:Render()
     love.graphics.line(0, 0, self.x1, self.y1)
     love.graphics.circle('fill', self.x1, self.y1, math.min(self.m1, 25), math.min(self.m1, 25))
 
     love.graphics.line(self.x1, self.y1, self.x2, self.y2)
     love.graphics.circle('fill', self.x2, self.y2, math.min(self.m2, 25), math.min(self.m2, 25))
-
-    love.graphics.line(self.canvas)
+    love.graphics.setPointSize(2)
+    love.graphics.points(self.canvas)
 
 end
