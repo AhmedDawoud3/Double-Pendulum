@@ -20,26 +20,21 @@ function love.load()
 end
 
 function love.update(dt)
-
+    -- if #canvas > 100 then
+    --     for i, v in ipairs(canvas) do
+    --         canvas[i - 2] = canvas[i]
+    --     end
+    -- end
 end
 
 function love.draw()
 
-    num1 = -g * (2 * m1 + m2) * sin(a1)
-    num2 = -m2 * g * sin(a1 - 2 * a2)
-    num3 = -2 * sin(a1 - a2) * m2
-    num4 = a2_v ^ 2 * r2 + a1_v ^ 2 * r1 * cos(a1 - a2)
-    den = r1 * (2 * m1 + m2 - m2 * cos(2 * a1 - 2 * a2))
+    a1_a = ((-g * (2 * m1 + m2) * sin(a1)) + (-m2 * g * sin(a1 - 2 * a2)) + (-2 * sin(a1 - a2) * m2) *
+               (a2_v ^ 2 * r2 + a1_v ^ 2 * r1 * cos(a1 - a2))) / (r1 * (2 * m1 + m2 - m2 * cos(2 * a1 - 2 * a2)))
 
-    a1_a = (num1 + num2 + num3 * num4) / den
-
-    num1 = 2 * sin(a1 - a2)
-    num2 = (a1_v ^ 2 * r1 * (m1 + m2))
-    num3 = g * (m1 + m2) * cos(a1)
-    num4 = a2_v ^ 2 * r2 * m2 * cos(a1 - a2)
-    den = r2 * (2 * m1 + m2 - m2 * cos(2 * a1 - 2 * a2))
-
-    a2_a = (num1 * (num2 + num3 + num4)) / den
+    a2_a = ((2 * sin(a1 - a2)) *
+               ((a1_v ^ 2 * r1 * (m1 + m2)) + (g * (m1 + m2) * cos(a1)) + (a2_v ^ 2 * r2 * m2 * cos(a1 - a2)))) /
+               (r2 * (2 * m1 + m2 - m2 * cos(2 * a1 - 2 * a2)))
     love.graphics.clear(1, 1, 1, 1)
     love.graphics.setColor(0, 0, 0, 1)
     -- love.graphics.setLineWidth(2)
@@ -58,8 +53,6 @@ function love.draw()
 
     love.graphics.line(x1, y1, x2, y2)
     love.graphics.circle('fill', x2, y2, m2, m2)
-
-    print(#canvas)
 
     love.graphics.line(canvas)
 
