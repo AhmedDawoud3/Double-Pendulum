@@ -3,11 +3,12 @@ require 'doublePendulum'
 
 g = 1
 p = {}
+dT = 0
 function love.load()
     love.window.setMode(900, 600)
-    love.window.setTitle("Double Pendulum")
+    love.window.setTitle("Double Pendulum By Ahmed Dawoud")
     for i = 1, 10000 do
-        p[i] = DoublePendulum(200, 200, 1, 1, math.pi / 2 + 0.000001 * i, math.pi / 2)
+        p[i] = DoublePendulum(200, 200, 1, 1, math.pi / 2 + 0.00001 * i, math.pi / 2)
     end
 end
 
@@ -15,6 +16,7 @@ function love.update(dt)
     for i, v in ipairs(p) do
         v:Update(dt, g)
     end
+    dT = dt
 end
 
 function love.draw()
@@ -27,6 +29,8 @@ function love.draw()
         love.graphics.setColor(HSL(i / #p * 255, 255, 100, 1))
         v:Render()
     end
+    love.graphics.translate(-love.graphics.getWidth() / 2, -50)
+    love.graphics.print("FPS :" .. tostring(1 / dT))
 end
 
 function sin(x)
